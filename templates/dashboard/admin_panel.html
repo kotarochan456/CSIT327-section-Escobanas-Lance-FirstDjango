@@ -1,5 +1,16 @@
 {% extends "base.html" %}
+
+{% block title %}Admin panel | Campus Connect{% endblock %}
+
 {% block content %}
-    <h1>Admin Panel</h1>
-    <p>Registered campus members: {{ member_count }}</p>
+    <div class="mb-4">
+        <h1 class="h3 mb-1">Admin panel</h1>
+        <p class="text-secondary mb-0">Campus membership overview</p>
+    </div>
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <p class="text-secondary mb-1">Registered members</p>
+            <p class="display-5 mb-0">{{ member_count }}</p>
+        </div>
+    </div>
 {% endblock %}

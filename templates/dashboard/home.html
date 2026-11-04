@@ -1,14 +1,30 @@
 {% extends "base.html" %}
 
+{% block title %}Dashboard | Campus Connect{% endblock %}
+
 {% block content %}
-<h2>Welcome, {{ user.first_name|default:user.username }}!</h2>
-<ul>
-    <li>Role: {{ user.get_role_display }}</li>
-    <li>Course: {{ user.course|default:"Not set" }}</li>
-    <li>Members: {{ member_count }}</li>
-    <li>Last login: {{ user.last_login|date:"M d, Y" }}</li>
-</ul>
-{% if is_admin %}
-    <a href="{% url 'admin_panel' %}">Open admin panel</a>
-{% endif %}
+    <div class="mb-4">
+        <h1 class="h3 mb-1">Welcome, {{ user.first_name|default:user.username }}</h1>
+        <p class="text-secondary mb-0">Your Campus Connect overview</p>
+    </div>
+    <div class="row g-3">
+        <div class="col-12 col-md-6">
+            <section class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h2 class="h6 text-secondary">Your account</h2>
+                    <p class="mb-1"><strong>Role:</strong> {{ user.get_role_display }}</p>
+                    <p class="mb-0"><strong>Course:</strong> {{ user.course|default:"Not set" }}</p>
+                </div>
+            </section>
+        </div>
+        <div class="col-12 col-md-6">
+            <section class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h2 class="h6 text-secondary">Campus community</h2>
+                    <p class="display-6 mb-0">{{ member_count }}</p>
+                    <p class="text-secondary mb-0">registered members</p>
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}

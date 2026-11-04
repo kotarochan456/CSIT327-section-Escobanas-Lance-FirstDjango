@@ -17,13 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import path, include
+from accounts.forms import LoginForm
 from accounts.views import SignUpView
 from dashboard.views import AdminPanelView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/login/",
-         LoginView.as_view(redirect_authenticated_user=True),
+         LoginView.as_view(
+             form_class=LoginForm,
+             redirect_authenticated_user=True,
+         ),
          name="login"),
     path("dashboard/admin-panel/", AdminPanelView.as_view(),
          name="dashboard_admin_panel"),

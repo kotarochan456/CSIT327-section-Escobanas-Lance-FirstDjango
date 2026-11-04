@@ -15,7 +15,7 @@ class HomePageTests(TestCase):
         response = self.client.get(reverse("dashboard"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Welcome, campusstudent!")
+        self.assertContains(response, "Welcome, campusstudent")
 
 
 class AdminPanelTests(TestCase):
@@ -32,7 +32,8 @@ class AdminPanelTests(TestCase):
                 response = self.client.get(url)
 
                 self.assertEqual(response.status_code, 200)
-                self.assertContains(response, "Admin Panel")
+                self.assertContains(response, "Admin panel")
+                self.assertContains(response, "Registered members")
 
 
 class ProfilePageTests(TestCase):
@@ -59,7 +60,7 @@ class ProfilePageTests(TestCase):
         response = self.client.get(reverse("profile"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Edit your profile")
+        self.assertContains(response, "Your profile")
         self.assertContains(response, "Computer Science")
 
         response = self.client.post(

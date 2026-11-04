@@ -9,6 +9,8 @@ class AccountPagesTests(TestCase):
         response = self.client.get(reverse("signup"))
 
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "bootstrap@5.3.3")
+        self.assertContains(response, "class=\"form-control\"")
 
     def test_short_signup_url_renders(self):
         response = self.client.get("/signup/")
