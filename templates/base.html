@@ -5,6 +5,7 @@
     <nav>
         {% if user.is_authenticated %}
             Hi, {{ user.username }}!
+            <a href="{% url 'profile' %}">Profile</a>
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit">Log out</button>
@@ -14,6 +15,15 @@
             <a href="{% url 'signup' %}">Sign up</a>
         {% endif %}
     </nav>
-    <main>{% block content %}{% endblock %}</main>
+    <main>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>

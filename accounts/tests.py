@@ -49,6 +49,22 @@ class AccountPagesTests(TestCase):
         self.assertRedirects(response, reverse("login"))
         self.assertTrue(CustomUser.objects.filter(username="campusstudent").exists())
 
+    def test_signup_shows_success_feedback_after_redirect(self):
+        response = self.client.post(
+            reverse("signup"),
+            {
+                "username": "newcampusstudent",
+                "email": "newstudent@example.com",
+                "role": CustomUser.Role.STUDENT,
+                "password1": "CampusConnect!2468",
+                "password2": "CampusConnect!2468",
+            },
+            follow=True,
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Your account has been created successfully")
+
     def test_login_redirects_to_home(self):
         CustomUser.objects.create_user(
             username="campusstudent",
