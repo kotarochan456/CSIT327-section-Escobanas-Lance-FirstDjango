@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Campus Connect</title>
+</head>
+<body>
+    <main>
+        <h1>Campus Connect</h1>
+        {% if user.is_authenticated %}
+            <p>Welcome, {{ user.first_name|default:user.username }}.</p>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+            </form>
+        {% else %}
+            <p>Connect with your campus community.</p>
+            <p>
+                <a href="{% url 'login' %}">Log in</a>
+                or
+                <a href="{% url 'signup' %}">create an account</a>.
+            </p>
+        {% endif %}
+    </main>
+</body>
+</html>
